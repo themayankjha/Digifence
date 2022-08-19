@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>DigiFence</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="custom-menu">
+					<button type="button" id="sidebarCollapse" class="btn btn-primary">
+	          <i class="fa fa-bars"></i>
+	          <span class="sr-only">Toggle Menu</span>
+	        </button>
+        </div>
+				<div class="p-4 pt-5">
+		  		<h1><a href="/" class="logo">DigiFence</a></h1>
+	        <ul class="list-unstyled components mb-5">
+	          <li class="active">
+	              <a href="/container">Containers</a>
+	          </li>
+	          <li>
+              <a href="/files">Files</a>
+	          </li>
+	          <li>
+              <a href="/program">Programs</a>
+	          </li>
+			  <li>
+				<a href="/" target="_blank" onmouseover="javascript:event.target.port=8888">SSH</a>
+			  </li>
+			  <li>
+				<a href="#">Logout</a>
+			  </li>
+	        </ul>
+
+
+	        <div class="footer">
+	        	<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
+						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+	        </div>
+
+	      </div>
+    	</nav>
+
+      <div id="content" class="p-4 p-md-5 pt-5">
+
+        <h2 class="mb-4">Containers</h2>
+		
+		{% for items in containerslist %}
+				<div class="card">
+				<div class="card-block">
+				<h4 class="card-title">{{items.name}}</h4>
+				<p class="card-text">{{items.image}}</p>
+				<p class="card-text">{{items.status}}</p>
+				<p class="card-text">{{items.short_id}}</p>
+				<a href="/container/{{items.short_id}}"  class="btn btn-primary">Access</a>
+				<form action="/container/{{items.short_id}}" method="post">
+					<input class="btn btn-danger" type="submit" name="delete" value="delete" />
+				</form>
+				
+			</div>
+				</div>
+			<br>
+		{% endfor %}
+
+
+
+				
+		</div>
+		</div>
+
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  </body>
+</html>
